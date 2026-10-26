@@ -2,7 +2,7 @@ name: CI
 on: push
 
 jobs:
-  test:
+  test-exec:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -13,3 +13,11 @@ jobs:
 
     - name: End Proc
       run: echo "@@@@@ end @@@@@@@@@@@@"
+
+  after-test:
+    # needsを指定すると、jobを順番に実行できる
+    needs: test-exec
+    runs-on: ubuntu-latest
+    steps:
+      - name: after test step1
+        run: echo "**** after test desu ***"
