@@ -1,6 +1,10 @@
 name: CI
 on: push
 
+# 環境変数の定義（jobをまたいで変数をやりとりできる）
+env:
+  VAR_TEST_RET: "var_testの内容です"
+
 jobs:
   test-exec:
     runs-on: ubuntu-latest
@@ -20,4 +24,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: after test step1
-        run: echo "**** after test desu ***"
+        run: echo "**** after test desu VAR_TEST_RET... ${VAR_TEST_RET}***"
