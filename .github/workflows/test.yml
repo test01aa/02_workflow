@@ -10,12 +10,18 @@ env:
 jobs:
   test-exec:
     runs-on: ubuntu-latest
+    outputs:
+      version-number: ${{ steps.set-version.outputs.version }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Java Test
       run: cd hello && javac *.java && java HelloTest
+
+    - id: set-version
+      name: set-version-name
+      run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
     - name: End Proc
       run: echo "@@@@@ end @@@@@@@@@@@@"
@@ -26,4 +32,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: after test step1
-        run: echo "**** after test desu VAR_TEST_RET... ${VAR_TEST_RET}***"
+        run: echo "**** after test desu VAR_TEST_RET... ${VAR_TEST_RET}*** version ${{ needs.test-exec.outputs.version-number }}"
