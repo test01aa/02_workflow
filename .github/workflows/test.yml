@@ -1,5 +1,7 @@
 name: CI
-on: push
+on:
+  push:
+    branches: [main]
 
 # 環境変数の定義（jobをまたいで変数をやりとりできる）
 env:
