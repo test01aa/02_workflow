@@ -11,6 +11,7 @@ jobs:
   test-exec:
     runs-on: ubuntu-latest
     outputs:
+      # 変数の定義（jobをまたいで変数をやりとりできる）
       version-number: ${{ steps.set-version.outputs.version }}
     steps:
     - name: Checkout code
@@ -19,7 +20,9 @@ jobs:
     - name: Java Test
       run: cd hello && javac *.java && java HelloTest
 
-    - id: set-version
+      # GITHUB_OUTPUT は、ワークフロー内のステップ間で値やパラメータを受け渡すために使用する環境変数ファイル
+      # github.run_number はGitHubActionsでワークフローが実行される度に1ずつ数が増えていきます。（初めての実行時は1）
+      - id: set-version
       name: set-version-name
       run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
