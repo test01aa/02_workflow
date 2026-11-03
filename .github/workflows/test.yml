@@ -35,4 +35,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: after test step1
-        run: echo "**** after test desu VAR_TEST_RET... ${VAR_TEST_RET}*** version ${{ needs.test-exec.outputs.version-number }}"
+        run: echo "**** after test desu VAR_TEST_RET... ${VAR_TEST_RET}***** version ${{ needs.test-exec.outputs.version-number }}"
